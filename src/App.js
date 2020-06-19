@@ -5,7 +5,6 @@ import PizzaForm from './components/Form';
 import formSchema from './components/FormSchema';
 import * as yup from "yup";
 import { v4 as uuid } from 'uuid';
-import Pizza from './components/Pizza';
 
 const initialFormValues = {
   name: '',
@@ -24,19 +23,27 @@ const initialFormErrors ={
   size: '',
 };
 
-const initialPizzas = [];
-
 const initialDisabled = true;
 
 const App = () => {
 
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
-  const [pizza, setPizza] = useState(initialPizzas);
+  const [pizza, setPizza] = useState([]);
   const [disabled, setDisabled] = useState(initialDisabled);
 
-  const postPizza = (pizza) =>{
-    axios.post('https://reqres.in/', pizza)
+  // const getPizza = () =>{
+  //   axios.get('https://reqres.in/')
+  //   .then(response =>{
+  //     console.log(response)
+  //   })
+  //   .catch(error =>{
+  //     console.log(error)
+  //   })
+  // }
+
+  const postPizza = (newPizza) =>{
+    axios.post('https://reqres.in/api/pizza', newPizza)
     .then(response =>{
       setPizza([...pizza, response.data])
     })
@@ -92,11 +99,17 @@ const App = () => {
       name: formValues.name,
       size: formValues.size,
       instructions: formValues.instructions,
-      id: uuid(),
       toppings: Object.keys(formValues.toppings)
-      .filter(toppingName => (formValues.toppings[toppingName] === true))
+      .filter(toppingName => (formValues.toppings[toppingName] === true)),
+      id: uuid(),
     }
+
+    postPizza(newPizza)
   }
+
+  // useEffect(()=>{
+  //   getPizza()
+  // })
 
   useEffect(() =>{
     formSchema.isValid(formValues).then(valid =>{
@@ -123,16 +136,8 @@ const App = () => {
           onSubmit={onSubmit}
           disabled={disabled}
           errors={formErrors}
+          pizzas={pizza}
           />
-        </Route>
-        <Route path={'/Pizza/'}>
-          {
-            pizza.map(pizza =>{
-              return(
-                <Pizza key={pizza.id} details={pizza}/>
-              )
-            })
-          }
         </Route>
       </div>
     </div>

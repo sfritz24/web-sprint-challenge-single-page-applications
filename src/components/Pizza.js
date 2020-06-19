@@ -1,7 +1,6 @@
 import React from 'react';
 
-export default function Pizza (props){
-    const {details} = props
+export default function Pizza ({details}){
 
     if(!details){
         return (<div>Working to put your pizza together!</div>)
@@ -22,7 +21,7 @@ export default function Pizza (props){
                             </ul>
                         </div>
                 }
-                <p>Special Instructions: {details.instructions}</p>
+                <p>Special Instructions: "{details.instructions}"</p>
             </div>
         </div>
     )

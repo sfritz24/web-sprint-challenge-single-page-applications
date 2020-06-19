@@ -1,4 +1,6 @@
 import React from 'react';
+import Pizza from './Pizza';
+import {Route, Link} from 'react-router-dom';
 
 export default function PizzaForm (props){
     const {
@@ -8,9 +10,11 @@ export default function PizzaForm (props){
         onCheckboxChange,
         disabled,
         errors,
+        pizzas,
       } = props
 
     return (
+        <div>
         <form onSubmit={onSubmit}>
             <div>
                 <h2>Create Your Pizza!!</h2>
@@ -51,14 +55,16 @@ export default function PizzaForm (props){
                         type='checkbox'
                         onChange={onCheckboxChange}
                         value={values.toppings.cheese}
+                        checked={values.toppings.cheese}
                         />
                     </label>
                     <label>Pepperon:&nbsp;
                         <input
-                        name='pepperion'
+                        name='pepperoni'
                         type='checkbox'
                         onChange={onCheckboxChange}
                         value={values.toppings.pepperoni}
+                        checked={values.toppings.pepperoni}
                         />
                     </label>
                     <label>Mushrooms:&nbsp;
@@ -67,6 +73,7 @@ export default function PizzaForm (props){
                         type='checkbox'
                         onChange={onCheckboxChange}
                         value={values.toppings.mushrooms}
+                        checked={values.toppings.mushrooms}
                         />
                     </label>
                     <label>Oinions:&nbsp;
@@ -75,6 +82,7 @@ export default function PizzaForm (props){
                         type='checkbox'
                         onChange={onCheckboxChange}
                         value={values.toppings.onions}
+                        checked={values.toppings.onions}
                         />
                     </label>
                 </div>
@@ -88,5 +96,13 @@ export default function PizzaForm (props){
                 </label>
             </div>
         </form>
+            {
+            pizzas.map(pizza =>{
+              return(
+                <Pizza key={pizza.id} details={pizza}/>
+              )
+            })
+          }
+        </div>
     )
 }
