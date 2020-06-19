@@ -15,13 +15,14 @@ export default function PizzaForm (props){
 
     return (
         <div>
+        
         <form onSubmit={onSubmit}>
             <div>
-                <h2>Create Your Pizza!!</h2>
-                <button disabled={disabled}>Submit</button>
+            <h2>Create Your Pizza!!</h2>
+           <button disabled={disabled} id='submitBttn'>Submit</button>
                 <div className='errors'>
-                    <div>{errors.name}</div>
-                    <div>{errors.size}</div>
+                    <div id='nameError'>{errors.name}</div>
+                    <div id='sizeError'>{errors.size}</div>
                 </div>
             </div>
             <div>
@@ -96,7 +97,8 @@ export default function PizzaForm (props){
                 </label>
             </div>
         </form>
-        <Route path={'/Form/Pizza'}>
+        
+        <Route path={'/Form'}>
             {
             pizzas.map(pizza =>{
               return(
