@@ -96,6 +96,7 @@ export default function PizzaForm (props){
                 </label>
             </div>
         </form>
+        <Route path={'/Form/Pizza'}>
             {
             pizzas.map(pizza =>{
               return(
@@ -103,6 +104,7 @@ export default function PizzaForm (props){
               )
             })
           }
+        </Route>
         </div>
     )
 }
