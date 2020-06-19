@@ -21,7 +21,7 @@ export default function Pizza ({details}){
                             </ul>
                         </div>
                 }
-                <p>Special Instructions: "{details.instructions}"</p>
+                <p>Special Instructions: {details.instructions}</p>
             </div>
         </div>
     )
